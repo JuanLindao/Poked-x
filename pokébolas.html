@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex de Hoenn</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gotham&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+              body {
+            background-color: rgb(228,121,121);
+            margin: 0 auto;
+            font-family: 'Gotham', cursive;
+        }
+        table {
+            border-collapse: collapse;
+            width: 75%;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid rgb(0,0,0);
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #A6E2EB;
+        }
+        td img {
+            width: 125px;
+            height: 120px;
+            vertical-align: middle;
+        }
+        #pokemon-table tbody tr:nth-child(even) {
+            background-color: #DA9F9F;
+      }
+              footer {
+            background-color: #464646;
+            color: rgb(250,255,121);
+            text-align: center;
+            padding: 2px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+      }
+      .back-to-home {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.back-to-home svg {
+  width: 24px;
+  height: 24px;
+  fill: #000;
+}
+
+.back-to-home .screen-reader-text {
+  position: absolute;
+  clip-path: inset(50%);
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  word-wrap: normal !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  &:focus {
+    display: block;
+    top: 5px;
+    left: 5px;
+    z-index: 100000;
+    clip-path: none;
+    background-color: #eee;
+    padding: 15px 23px 14px;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+    line-height: normal;
+    color: #444;
+    font-size: 1em;
+    clip: auto !important;
+  }
+}
+  </style>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <a href="index.html" class="back-to-home">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+  </svg>
+  <span class="screen-reader-text">Back to home</span>
+</a>
+      <footer>
+        <p>Projetado por Juan e a benevolência de seus Seis Olhos.</p>
+    </footer>
+        <script>
+            function keepHomePageBackgroundColor() {
+    var homePageBody = document.body.id === 'home-page';
+    if (homePageBody) {
+      document.body.style.backgroundColor = 'rgb(228,121,121)';
+    }
+  }
+
+  window.onload = keepHomePageBackgroundColor;
+          
+         document.getElementById('search-box').addEventListener('keyup', function(event) {
+            var input = event.target.value.toLowerCase();
+            var rows = document.querySelectorAll('#pokemon-table tbody tr');
+
+            rows.forEach(function(row) {
+                var text = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                if (text.indexOf(input) !== -1) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+          
+    </script>
+<body>
+    <table id="pokemon-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+              <th>Chance de captura</th>
+                <th>Descrição</th>
+                <th>Imagem</th>
+            </tr>
+                  <tbody>       
+           <tr>
+    <td>Poké Bola</td>
+    <td>1x</td>
+    <td>Uma Pokébola comum, e barata, usada para todo tipo de ocasião por sua simplicidade e disponibilidade. Em geral, é uma Pokébola inicial, todo treinador tem posse.</td>
+    <td><img alt="Poké Ball" src="//archives.bulbagarden.net/media/upload/7/79/Dream_Pok%C3%A9_Ball_Sprite.png"></td>
+</tr>
+  <tr>
+            <td>Great Ball</td>
+            <td>1.5x</td>
+            <td>A Great Ball é uma Pokébola mais eficaz e confiável, ideal para capturar Pokémon selvagens mais difíceis de serem capturados. Ela tem uma taxa de sucesso maior do que a Poké Bolas padrão.</td>
+            <td><img alt="Great Ball" src="//archives.bulbagarden.net/media/upload/b/bf/Dream_Great_Ball_Sprite.png"></td>
+        </tr>
+        <tr>
+            <td>Ultra Ball</td>
+            <td>2x</td>
+            <td>A Ultra Ball é a Pokébola "mais eficaz" disponível, projetada para capturar Pokémon selvagens evasivos e poderosos. Ela tem o dobro da taxa de captura de uma Poké Bola padrão.</td>
+            <td><img alt="Ultra Ball" src="//archives.bulbagarden.net/media/upload/a/a8/Dream_Ultra_Ball_Sprite.png"></td>
+        </tr>
+        <tr>
+            <td>Master Ball</td>
+            <td>255x (100%)</td>
+            <td>A Master Ball é uma Pokébola especial que não pode falhar ao capturar qualquer Pokémon. Ela é extremamente rara e geralmente é dada a treinadores que provaram ser realmente habilidosos e dedicados.</td>
+            <td><img alt="Master Ball" src="//archives.bulbagarden.net/media/upload/9/95/Dream_Master_Ball_Sprite.png"></td>
+        </tr>
+      </tbody>                    
+        </thead>
+  </table>
+  </body>
+  </body>
+</html>
